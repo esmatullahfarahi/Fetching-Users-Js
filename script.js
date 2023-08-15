@@ -10,7 +10,9 @@ const loadUserData = async () => {
     if (!response.ok) throw new Error('Failed to fetch user data');
     allUsers = await response.json();
      renderUsers(allUsers);
-    console.log(allUsers)
+     sortUsersAlphabetically();
+    renderUsers(allUsers);
+  //  console.log(allUsers)
 
   } catch (error) {
     console.error('Error loading user data:', error);
@@ -54,6 +56,25 @@ const renderUsers = (users) => {
         .join('');
 };
 
+
+// Function to filter users based on search term
+const filterUsers = () => {
+  const searchTerm = document.getElementById('searchField').value.toLowerCase();
+  const filteredUsers = allUsers.filter(user =>
+    user.name.toLowerCase().includes(searchTerm)
+  );
+  sortUsersAlphabetically(filteredUsers);
+  renderUsers(filteredUsers);
+};
+
+// Function to sort users alphabetically by name
+const sortUsersAlphabetically = (users = allUsers) => {
+  users.sort((a, b) => a.name.localeCompare(b.name));
+};
+
+// Event listener for search input
+const searchInput = document.getElementById('searchField');
+searchInput.addEventListener('input', filterUsers);
 
 // Load user data and initial rendering on page load
 loadUserData();
