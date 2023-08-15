@@ -20,9 +20,13 @@ body {
   max-width: calc(
     24% - 2%
   ); 
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-
+.user-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
 .user-card h2 {
   border-bottom: 2px solid #ddd;
